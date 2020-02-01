@@ -1,11 +1,19 @@
+const path = require('path')
 const express = require('express')
 const app = express()
 
+const publicDirectory = path.join(__dirname, "../public")
+console.log(publicDirectory);
 
-app.get('/', (req, res) => { res.send('Home Page')})
-app.get('/help', (req, res) => { res.send('Help Page')})
-app.get('/about', (req, res) => { res.send('About Page')})
-app.get('/weather', (req, res) => { res.send('Weather Page')})
+app.use(express.static(publicDirectory))
+
+// app.get('/', (req, res) => { res.send('<h1>Home Page</h1>')})
+app.get('/help', (req, res) => { res.sendFile(`${publicDirectory}/help.html`) })
+app.get('/about', (req, res) => { res.sendFile(`${publicDirectory}/about.html`) })
+app.get('/weather', (req, res) => { res.send({ 
+    forecast: 'f' , 
+    location: 'loc'
+})})
 
 
 app.listen(3000, () => console.log('Server running'))
