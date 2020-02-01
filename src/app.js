@@ -1,16 +1,25 @@
 // require path and express module
 const path = require('path')
 const express = require('express')
+const hbs = require('hbs')
 
 // assigning express to variable
 const app = express()
 
 // creating path location to public directory
 const publicDirectory = path.join(__dirname, "../public")
+const templatesPath = path.join(__dirname, "../views/templates")
+const partialsPath = path.join(__dirname, "../views/partials")
 console.log(publicDirectory);
 
 // setting view engine to hbs to render view 
 app.set('view engine', 'hbs')
+
+// setting templates path
+app.set('views', templatesPath)
+
+// setting partials path "registerPartials()"
+hbs.registerPartials(partialsPath)
 
 // assigning index to default url
 app.use(express.static(publicDirectory))
