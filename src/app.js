@@ -37,9 +37,17 @@ app.get('/about', (req, res) => { res.render('about', {
     title: "about",
     createdBy: "sls"
 }) })
-app.get('/weather', (req, res) => { res.send({ 
-    forecast: 'f' , 
-    location: 'loc'
+app.get('/weather', (req, res) => { 
+    
+    if (!req.query.address) {
+        return res.send({
+            Error: 'No address provided...',
+        })
+    }
+    res.send({
+        forecast: 'f',
+        location: 'loc',
+        address: req.query.address
 })})
 
 
