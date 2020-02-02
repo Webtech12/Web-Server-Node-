@@ -2,6 +2,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
 // assigning express to variable
 const app = express()
@@ -37,18 +39,24 @@ app.get('/about', (req, res) => { res.render('about', {
     title: "about",
     createdBy: "sls"
 }) })
-app.get('/weather', (req, res) => { 
-    
+app.get('/weather', (req, res) => {
+
     if (!req.query.address) {
         return res.send({
             Error: 'No address provided...',
         })
     }
-    res.send({
-        forecast: 'f',
-        location: 'loc',
-        address: req.query.address
-})})
+
+    geocode(req.query.address, (err, data) => {
+        forecast(data.lat, data.lon, (err, forecast) => {
+            res.send({
+                forecast: forecast,
+                location: `${data.lat} , ${data.lon}`,
+                address: data.location
+            })
+        })
+    })
+})
 
 
 // url not found routes
