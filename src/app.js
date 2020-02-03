@@ -48,6 +48,10 @@ app.get('/weather', (req, res) => {
     }
 
     geocode(req.query.address, (err, data) => {
+
+        if (err) {
+            return res.send({ err })
+        }
         forecast(data.lat, data.lon, (err, forecast) => {
             res.send({
                 forecast: forecast,

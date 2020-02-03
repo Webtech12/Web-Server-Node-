@@ -24,8 +24,8 @@ request(mapurl, (err, res) => {
                 lon,
                 location
             })
-        } catch (error) {
-            console.log('City Not Found' + error);
+        } catch (err) {
+            callback("City Not Found", undefined)
         }
         
     }
