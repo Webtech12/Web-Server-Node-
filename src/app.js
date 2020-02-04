@@ -8,6 +8,9 @@ const forecast = require('./utils/forecast')
 // assigning express to variable
 const app = express()
 
+// heroku enviornment variable port || 3000
+const port = process.env.PORT || 3000
+
 // creating path location to public directory
 const publicDirectory = path.join(__dirname, "../public")
 const templatesPath = path.join(__dirname, "../views/templates")
@@ -79,4 +82,4 @@ app.get('*', (req, res) => {
 })
 
 // running the server on port 3000
-app.listen(3000, () => console.log('Server running'))
+app.listen(port, () => console.log('Server running'))

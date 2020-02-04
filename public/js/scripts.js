@@ -3,7 +3,7 @@ console.log('scripts loaded');
 // fetching forecasts data through fetch api
 
 const fetchForecast = (params, callback) => {
-    fetch(`http://localhost:3000/weather?address=${params}`).then((response) => {
+    fetch(`/weather?address=${params}`).then((response) => {
         response.json().then((data) => {
             if (data.err)
                 console.log(data.err)
