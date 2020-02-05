@@ -12,6 +12,7 @@ const fetchForecast = (params, callback) => {
                 p1.textContent = data.forecast,
                 p2.textContent = data.location,
                 p3.textContent = data.address
+                
 
         })
     })
@@ -30,5 +31,6 @@ weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
     let city = input.value
+    
     console.log(fetchForecast(city));
 })

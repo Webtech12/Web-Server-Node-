@@ -4,6 +4,7 @@ const express = require('express')
 const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+const fs = require('fs');
 
 // assigning express to variable
 const app = express()
@@ -15,7 +16,8 @@ const port = process.env.PORT || 3000
 const publicDirectory = path.join(__dirname, "../public")
 const templatesPath = path.join(__dirname, "../views/templates")
 const partialsPath = path.join(__dirname, "../views/partials")
-console.log(publicDirectory);
+const txtPath = path.join(__dirname, "../txtfiles")
+console.log(txtPath);
 
 // setting view engine to hbs to render view 
 app.set('view engine', 'hbs')
@@ -61,10 +63,26 @@ app.get('/weather', (req, res) => {
                 location: `${data.lat} , ${data.lon}`,
                 address: data.location
             })
+            const weatherJson = {
+                forecast: forecast,
+                location: `${data.lat} , ${data.lon}`,
+                address: data.location
+            }
+            saveJson(weatherJson)
         })
     })
 })
 
+// saving the weather json in files
+const saveJson = (weatherJson) => {
+    // console.log(JSON.stringify(weatherJson));
+    fs.writeFile(`${txtPath}/weather.json`, JSON.stringify(weatherJson), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    })
+}
 
 // url not found routes
 
