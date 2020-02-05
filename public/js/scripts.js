@@ -11,7 +11,8 @@ const fetchForecast = (params, callback) => {
                 console.log(data)
                 p1.textContent = data.forecast,
                 p2.textContent = data.location,
-                p3.textContent = data.address
+                p3.textContent = data.address,
+                p4.textContent = data.temperature
                 
 
         })
@@ -26,6 +27,7 @@ const input = document.querySelector('input')
 const p1 = document.querySelector('#m1')
 const p2 = document.querySelector('#m2')
 const p3 = document.querySelector('#m3')
+const p4 = document.querySelector('#temp')
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()

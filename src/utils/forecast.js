@@ -17,7 +17,11 @@ const forecast= (lat, lon, callback) => {
         const { daily : {data : [s] } } = data
         // logging the stored properties in the terminal
         // callback(undefined, data)
-        callback(undefined, `It is currently ${data.currently.temperature} degrees . There is a ${s.precipProbability}% chance of rain`)
+        // callback(undefined, `It is currently ${data.currently.temperature} degrees . There is a ${s.precipProbability}% chance of rain`)
+        callback(undefined, {
+            forecast: `It is currently ${data.currently.temperature} degrees . There is a ${s.precipProbability}% chance of rain`,
+            tempStats: `High ${s.temperatureHigh}, Low ${s.temperatureLow}`
+        })
         }
     })
 }

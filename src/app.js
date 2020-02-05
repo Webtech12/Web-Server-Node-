@@ -57,14 +57,16 @@ app.get('/weather', (req, res) => {
         if (err) {
             return res.send({ err })
         }
-        forecast(data.lat, data.lon, (err, forecast) => {
+        forecast(data.lat, data.lon, (err, forecastData) => {
             res.send({
-                forecast: forecast,
+                forecast: forecastData.forecast,
+                temperature: forecastData.tempStats,
                 location: `${data.lat} , ${data.lon}`,
                 address: data.location
             })
             const weatherJson = {
-                forecast: forecast,
+                forecast: forecastData.forecast,
+                temperature: forecastData.tempStats,
                 location: `${data.lat} , ${data.lon}`,
                 address: data.location
             }
